@@ -38,6 +38,7 @@ if ($datos == "s" || $datos == "S") {
               }
                  echo "\n";
               }
+// TEMPERATURA DE UN ANHO Y MES               
               echo "desea ver la temperatura de algun anho y mes en especificio? (s/n)";
               $especifico = trim(fgets(STDIN));
               
@@ -56,7 +57,8 @@ if ($datos == "s" || $datos == "S") {
                   echo "Los datos que ingreso, no son validos";
               } 
             } else { 
-                  echo "desea ver las temperaturas de todo un anho??(s/n)";
+// TEMPERATURA TODO UN ANHO                 
+              echo "desea ver las temperaturas de todo un anho??(s/n)";
                   $anual = trim(fgets(STDIN));
 
                  if ($anual == "s") {
@@ -71,22 +73,21 @@ if ($datos == "s" || $datos == "S") {
                      }
                   }
                 } else { 
-
+// TEMPERATURA MES X CADA ANHO
                   echo  "desea ver la temperatura de un mes en cada anho??(s/n)";
                   $tempMes = trim(fgets(STDIN));
-                  if ($tempMes == "s" || "S"){
-                    echo "Ingrese el mes(1-12): ";
-                    $mes = trim(fgets(STDIN)) - 1;
-                    if ($mes >= 0 && $mes <=12){
-                      for ($anho = 2014; $anho <= 2023; $anho++){
-                        echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . ($matrizAuto[$anho][$mes]) . " \n";
-                      
-                      }
+              if ($tempMes == "s" || "S"){
+                echo "Ingrese el mes(1-12): ";
+                $mes = trim(fgets(STDIN)) - 1;
+                $promedio = CalcularPromedio($anho, $mes);
+                if ($mes >= 0 && $mes <=12){
+                  for ($anho = 2014; $anho <= 2023; $anho++){
+                    echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . ($matrizAuto[$anho][$mes]) . " \n";
+                    echo "El promedio de temperatura es: " . $promedio;
+                    }  
                     }
-                    
-                   
-                  }
-                 }
+                    }
+                    }
                   
 
  
@@ -113,6 +114,7 @@ if ($datos == "s" || $datos == "S") {
                 }
                 echo "\n";
               }
+// TEMPERATURA DE UN ANHO Y MES
               echo "desea ver la temperatura de algun anho y mes en especificio? (s/n)";
               $especifico = trim(fgets(STDIN));
               
@@ -134,14 +136,15 @@ if ($datos == "s" || $datos == "S") {
                  }
              
             } else {
-                    echo "desea ver las temperaturas de todo un anho??(s/n)";
+// TEMPERATURA TODO UN ANHO                   
+              echo "desea ver las temperaturas de todo un anho??(s/n)";
                     $anual = trim(fgets(STDIN));
   
                    if($anual == "s" || "S") {
                    echo "ingrese el anho: ";
                    $anho = trim(fgets(STDIN));
                    
-                   if ($anho >= 2013 && $anho <= 2023){ 
+                   if ($anho >= 2014 && $anho <= 2023){ 
                       echo "la temperatura de todo el anho: " . $anho . "\n";
                       echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
                       for ($mes = 0; $mes <= 11; $mes++){ 
@@ -149,9 +152,38 @@ if ($datos == "s" || $datos == "S") {
                        }
                       
                   }
+             } else { 
+// TEMPERATURA UN MES X ANHO
+              echo  "desea ver la temperatura de un mes en cada anho??(s/n)";
+              $tempMes = trim(fgets(STDIN));
+              if ($tempMes == "s" || "S"){
+                echo "Ingrese el mes(1-12): ";
+                $mes = trim(fgets(STDIN)) - 1;
+                $promedio = CalcularPromedio($anho, $mes);
+                if ($mes >= 0 && $mes <=12){
+                  for ($anho = 2014; $anho <= 2023; $anho++){
+                    echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . ($matrizManual[$anho][$mes]) . " \n";
+                    echo "El promedio de temperatura es: ";
+                
+                  }
+                }
+                
+               
+              }
              }
   }
-  echo "";
+
 }
       
-    
+// CalcularPromedio
+function CalcularPromedio ($anho, $mes) {
+ $promedio = 0;
+ $TotalDecada = 0;
+ if ($mes >= 0 && $mes <= 12) {
+   for ($anho = 2014; $anho <= 2023; $anho++){
+      $TotalDecada += $mes;
+   }
+  $promedio = $TotalDecada / 12;
+  }
+return $promedio;
+}
