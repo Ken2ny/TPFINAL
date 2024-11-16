@@ -61,11 +61,17 @@ if ($datos == "s" || $datos == "S") {
 
                  if($anual == "s" || "S") {
                  echo "ingrese el anho: ";
-                $anho = trim(fgets(STDIN));
-                if ($anho >= 2013 && $anho <= 2023){ 
-                echo "la temperatura de todo el anho: " . $anho . " son: " . ($matrizAuto[$anho]); }
-    
-    }
+                 $anho = trim(fgets(STDIN));
+                 
+                 if ($anho >= 2013 && $anho <= 2023){ 
+                    echo "la temperatura de todo el anho: " . $anho . "\n";
+                    echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
+                    for ($mes = 0; $mes <= 11; $mes++){ 
+                     echo ($matrizAuto[$anho][$mes]) . "  ";
+                     }
+                    
+                }
+           }
 }
         
 }  else {
@@ -105,11 +111,24 @@ if ($datos == "s" || $datos == "S") {
                         echo "El anho ingresado no es valido";
                  }
              
-            }
-           echo "desea ver las temperaturas de todo un anho??(s/n)";
-           $anual = trim(fgets(STDIN));
-
-           if($anual == "s" || "S") {
-             echo "la temperatura de todo el anho: " . $anho . " son: " . ($matrizManual[$anho]);
-           }
-        }
+            } else {
+                    echo "desea ver las temperaturas de todo un anho??(s/n)";
+                    $anual = trim(fgets(STDIN));
+  
+                   if($anual == "s" || "S") {
+                   echo "ingrese el anho: ";
+                   $anho = trim(fgets(STDIN));
+                   
+                   if ($anho >= 2013 && $anho <= 2023){ 
+                      echo "la temperatura de todo el anho: " . $anho . "\n";
+                      echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
+                      for ($mes = 0; $mes <= 11; $mes++){ 
+                       echo ($matrizManual[$anho][$mes]) . "  ";
+                       }
+                      
+                  }
+             }
+  }
+}
+           
+    
