@@ -54,10 +54,20 @@ if ($datos == "s" || $datos == "S") {
                  }
               } else {
                   echo "Los datos que ingreso, no son validos";
-              }
-              } elseif ($especifico == "n" || $especifico == "N"){
-                  echo "Gracias por usar este programa \n";
-              }
+              } 
+            } else {
+                  echo "desea ver las temperaturas de todo un anho??(s/n)";
+                  $anual = trim(fgets(STDIN));
+
+                 if($anual == "s" || "S") {
+                 echo "ingrese el anho: ";
+                $anho = trim(fgets(STDIN));
+                if ($anho >= 2013 && $anho <= 2023){ 
+                echo "la temperatura de todo el anho: " . $anho . " son: " . ($matrizAuto[$anho]); }
+    
+    }
+}
+        
 }  else {
       echo "entonces cargaremos los datos manualmente \n";
       $matrizManual = [];      
@@ -88,16 +98,18 @@ if ($datos == "s" || $datos == "S") {
                 if(($anho >= 2014)&&($anho <= 2023)) {
                  if (($mes >= 0)&&($mes <= 11)){     
                        echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . ($matrizManual[$anho][$mes]);
+                 } else {
+                       echo "El mes ingresado no es valido";
                  }
-              } else {
-                  echo "Los datos que ingreso, no son validos";
-              }
-              } elseif ($especifico == "n" || $especifico == "N"){
-                  echo "Gracias por usar este programa \n";
-              }
+                 } else {
+                        echo "El anho ingresado no es valido";
+                 }
+             
             }
+           echo "desea ver las temperaturas de todo un anho??(s/n)";
+           $anual = trim(fgets(STDIN));
 
-
-
-
-  
+           if($anual == "s" || "S") {
+             echo "la temperatura de todo el anho: " . $anho . " son: " . ($matrizManual[$anho]);
+           }
+        }
