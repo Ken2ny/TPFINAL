@@ -73,7 +73,11 @@ if ($datos == "s" || $datos == "S") {
                 }
            }
 }
-        
+  echo  "desea ver la temperatura de un mes en cada anho??(s/n)";
+  $tempMes = trim(fgets(STDIN));
+  if ($temp == "s" || "S"){
+    echo "La temperatura en cada anho de: " . $tempMes . " es: " . ($matrizAuto[$anho][$mes]);
+  }      
 }  else {
       echo "entonces cargaremos los datos manualmente \n";
       $matrizManual = [];      
@@ -129,6 +133,7 @@ if ($datos == "s" || $datos == "S") {
                   }
              }
   }
+  echo "";
 }
            
     
