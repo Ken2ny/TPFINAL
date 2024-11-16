@@ -55,30 +55,48 @@ if ($datos == "s" || $datos == "S") {
               } else {
                   echo "Los datos que ingreso, no son validos";
               } 
-            } else {
+            } else { 
                   echo "desea ver las temperaturas de todo un anho??(s/n)";
                   $anual = trim(fgets(STDIN));
 
-                 if($anual == "s" || "S") {
+                 if ($anual == "s") {
                  echo "ingrese el anho: ";
                  $anho = trim(fgets(STDIN));
                  
-                 if ($anho >= 2013 && $anho <= 2023){ 
+                 if ($anho >= 2014 && $anho <= 2023){ 
                     echo "la temperatura de todo el anho: " . $anho . "\n";
                     echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
                     for ($mes = 0; $mes <= 11; $mes++){ 
                      echo ($matrizAuto[$anho][$mes]) . "  ";
                      }
+                  }
+                } else { 
+
+                  echo  "desea ver la temperatura de un mes en cada anho??(s/n)";
+                  $tempMes = trim(fgets(STDIN));
+                  if ($tempMes == "s" || "S"){
+                    echo "Ingrese el mes(1-12): ";
+                    $mes = trim(fgets(STDIN)) - 1;
+                    if ($mes >= 0 && $mes <=12){
+                      for ($anho = 2014; $anho <= 2023; $anho++){
+                        echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . ($matrizAuto[$anho][$mes]) . " \n";
+                      
+                      }
+                    }
                     
+                   
+                  }
+                 }
+                  
+
+ 
+ 
+ 
+ 
+ 
                 }
-           }
-}
-  echo  "desea ver la temperatura de un mes en cada anho??(s/n)";
-  $tempMes = trim(fgets(STDIN));
-  if ($temp == "s" || "S"){
-    echo "La temperatura en cada anho de: " . $tempMes . " es: " . ($matrizAuto[$anho][$mes]);
-  }      
-}  else {
+ // EMPIEZA LA MATRIZ MANUAL
+  } else {
       echo "entonces cargaremos los datos manualmente \n";
       $matrizManual = [];      
         for ($anho = 2014; $anho <= 2023; $anho++) {
@@ -135,5 +153,5 @@ if ($datos == "s" || $datos == "S") {
   }
   echo "";
 }
-           
+      
     
