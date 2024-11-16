@@ -25,6 +25,11 @@ $meses = [
   ];
 
 //Empieza el ALGORITMO
+$MaxTemp = 0;
+$MinTemp = 0;
+$AnhoMaxTemp = " ";
+$MesMaxTemp = " ";
+
 echo "desea cargar los datos automaticamente? (s/n)";
 $datos = trim(fgets(STDIN));
 
@@ -88,8 +93,6 @@ if ($datos == "s" || $datos == "S") {
                     
                     }
                     echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
-                    } else {
-                      echo "gracias";
                     }
                     }
                   
@@ -100,9 +103,18 @@ if ($datos == "s" || $datos == "S") {
  
                   }
                 }
+// Acumuladores de MAX TEMP + MIN + MES + ANHO
+if ($MaxTemp> );
  // EMPIEZA LA MATRIZ MANUAL
   } else {
-      echo "entonces cargaremos los datos manualmente \n";
+    $MaxTemp = 0;
+    $MinTemp = 0;
+    $AnhoMaxTemp = " ";
+    $MesMaxTemp = " ";
+    
+    
+    
+    echo "entonces cargaremos los datos manualmente \n";
       $matrizManual = [];      
         for ($anho = 2014; $anho <= 2023; $anho++) {
               for ($mes = 0; $mes <= 11; $mes++){
@@ -170,10 +182,8 @@ if ($datos == "s" || $datos == "S") {
                   echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . ($matrizAuto[$anho][$mes]) . " \n";
                   $promedio = CalcularPromedio($anho, $mes);               
   }  echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
-  } else {
-    echo "gracias";
+  }             
   }
-                }
                 
                
               }
