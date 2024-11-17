@@ -25,17 +25,17 @@ $meses = [
   ];
 
 //Empieza el ALGORITMO
-$MaxTemp = 0;
-$MinTemp = 0;
-$AnhoMaxTemp = " ";
-$MesMaxTemp = " ";
+$maxTemp = 0;
+$minTemp = 0;
+$mnhoMaxTemp = " ";
+$mesMaxTemp = " ";
 
-echo "desea cargar los datos automaticamente? (s/n)";
+echo "desea cargar los datos automaticamente? (sí/no)";
 $datos = trim(fgets(STDIN));
 
-if ($datos == "s" || $datos == "S") { 
+if ($datos == "sí") { 
      $matrizAuto = CargaDatosAutomatico($anho, $mes);
-     echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
+     echo "Año ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
          for ($anho = 2014; $anho <= 2023; $anho++) {
          echo $anho . " ";
               for ($mes = 0; $mes <= 11; $mes++){
@@ -44,12 +44,11 @@ if ($datos == "s" || $datos == "S") {
                  echo "\n";
               }
 // TEMPERATURA DE UN ANHO Y MES               
-              echo "desea ver la temperatura de algun anho y mes en especificio? (s/n)";
+              echo "desea ver la temperatura de algun año y mes en especificio? (sí/no)";
               $especifico = trim(fgets(STDIN));
               
-              
-              if($especifico == "s" || $especifico == "S") {
-                echo "ingrese el anho: ";
+              if($especifico == "sí") {
+                echo "ingrese el año: ";
                 $anho = trim(fgets(STDIN));
                 echo "ingrese el mes(1-12): ";
                 $mes = trim(fgets(STDIN)) - 1; 
@@ -64,9 +63,9 @@ if ($datos == "s" || $datos == "S") {
             } else { 
 // TEMPERATURA TODO UN ANHO                 
               echo "desea ver las temperaturas de todo un anho??(s/n)";
-                  $anual = trim(fgets(STDIN));
+                 $anual = trim(fgets(STDIN));
 
-                 if ($anual == "s") {
+                 if ($anual == "si") {
                  echo "ingrese el anho: ";
                  $anho = trim(fgets(STDIN));
                  
@@ -82,7 +81,7 @@ if ($datos == "s" || $datos == "S") {
                   echo  "desea ver la temperatura de un mes en cada anho??(s/n)";
                   $tempMes = trim(fgets(STDIN));
                      
-                  if ($tempMes == "s" || $tempMes == "S"){
+                  if ($tempMes == "si"){
                          echo "Ingrese el mes(1-12): ";
                          $mes = trim(fgets(STDIN)) - 1;
                          
@@ -104,13 +103,13 @@ if ($datos == "s" || $datos == "S") {
                   }
                 }
 // Acumuladores de MAX TEMP + MIN + MES + ANHO
-if ($MaxTemp> );
+if ($maxTemp> );
  // EMPIEZA LA MATRIZ MANUAL
   } else {
-    $MaxTemp = 0;
-    $MinTemp = 0;
-    $AnhoMaxTemp = " ";
-    $MesMaxTemp = " ";
+    $maxTemp = 0;
+    $minTemp = 0;
+    $anhoMaxTemp = " ";
+    $mesMaxTemp = " ";
     
     
     
