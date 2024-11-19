@@ -2,3 +2,4 @@ DUDAS
 para hacer los inciso h i jm puedo hacer mas de 1 modulo?? aunque dice que matrices un solo modulo
 se puede colocar primavera e invierno dentro del mismo modulo de auto y manual???
 puedo usar foreach??? como no lo vimos, use puro for 
+
