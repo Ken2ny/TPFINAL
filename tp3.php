@@ -3,25 +3,28 @@
 function CargarDatos($modo = "auto"){
 
 if ($modo == "auto") {
-$matrizAuto = array(
-  "2014" => array("enero" => 30, "febrero" =>28 ,"marzo" =>26 ,"abril" =>22,"mayo" =>18 ,"junio" =>12 ,"julio" =>10 ,"agosto" =>14,"septiembre" =>17 ,"octubre" => 20 ,"noviembre" => 25 ,"diciembre" => 29),
-  "2015" => array("enero" => 33, "febrero" =>30 ,"marzo" =>27 ,"abril" =>22,"mayo" =>19 ,"junio" =>13 ,"julio" =>11 ,"agosto" =>15 ,"septiembre" =>18 ,"octubre" =>21 ,"noviembre" => 26 ,"diciembre" =>31),
-  "2016" => array("enero" => 34, "febrero" =>32 ,"marzo" =>29 ,"abril" =>21,"mayo" =>18 ,"junio" =>14 ,"julio" =>12 ,"agosto" =>16 ,"septiembre" =>18 ,"octubre" =>21 ,"noviembre" =>27 ,"diciembre" =>32),
-  "2017" => array("enero" => 33 ,"febrero" =>31 ,"marzo" =>28 ,"abril" =>22,"mayo" =>18 ,"junio" =>13 ,"julio" =>11 ,"agosto" =>14 ,"septiembre" =>17 ,"octubre" =>22 ,"noviembre" =>26 ,"diciembre" =>31),
-  "2018" => array("enero" => 32 ,"febrero" =>30 ,"marzo" =>28 ,"abril" =>22,"mayo" =>17 ,"junio" =>12 ,"julio" =>9  ,"agosto" =>13 ,"septiembre" =>16 ,"octubre" =>20 ,"noviembre" => 24 ,"diciembre" =>30),
-  "2019" => array("enero" => 32 ,"febrero" =>30 ,"marzo" =>27 ,"abril" =>23,"mayo" =>19 ,"junio" =>14 ,"julio" =>12 ,"agosto" =>11 ,"septiembre" =>17 ,"octubre" =>23 ,"noviembre" =>25 ,"diciembre" =>29),
-  "2020" => array("enero" => 31 ,"febrero" =>29 ,"marzo" =>28 ,"abril" =>21,"mayo" =>19 ,"junio" =>13 ,"julio" =>10 ,"agosto" =>12 ,"septiembre" =>16 ,"octubre" =>22 ,"noviembre" =>27 ,"diciembre" =>29),
-  "2021" => array("enero" => 30 ,"febrero" =>28 ,"marzo" =>26 ,"abril" =>20,"mayo" =>16 ,"junio" =>12 ,"julio" =>11 ,"agosto" =>13 ,"septiembre" =>17 ,"octubre" =>21 ,"noviembre" =>28 ,"diciembre" =>30),
-  "2022" => array("enero" => 31 ,"febrero" =>29 ,"marzo" =>27 ,"abril" =>21,"mayo" =>17 ,"junio" =>12 ,"julio" =>11 ,"agosto" =>15 ,"septiembre" =>18 ,"octubre" =>22 ,"noviembre" =>26 ,"diciembre" =>30),
-  "2023" => array("enero" => 32 ,"febrero" =>30 ,"marzo" =>27 ,"abril" =>20,"mayo" =>16 ,"junio" =>13 ,"julio" =>13 ,"agosto" =>15 ,"septiembre" =>19 ,"octubre" =>23 ,"noviembre" =>28 ,"diciembre" =>31),
-);
-return $matrizAuto;
-
+$matrizAuto =  [ 
+        2014 => [30, 28 ,26 ,22 ,18 ,12 ,10, 14, 17, 20, 25, 29],
+        2015 => [33, 30, 27, 22, 19 ,13 ,11 ,15 ,18 ,21, 26 ,31],
+        2016 => [34, 32 ,29 ,21 ,18 ,14 ,12 ,16 ,18 ,21 ,27 ,32],
+        2017 => [33 ,31 ,28 ,22, 18 ,13 ,11 ,14 ,17 ,22 ,26 ,31],
+        2018 => [32 ,30 ,28 ,22, 17 ,12 ,9 ,13 ,16 ,20 , 24 ,30],
+        2019 => [32 ,30 ,27 ,23, 19 ,14 ,12 ,11 ,17 ,23 ,25 ,29],
+        2020 => [31 ,29 ,28 ,21, 19 ,13 ,10 ,12 ,16 ,22 ,27 ,29],
+        2021 => [30 ,28 ,26 ,20, 16 ,12 ,11 ,13 ,17 ,21 ,28 ,30],
+        2022 => [31 ,29 ,27 ,21, 17 ,12 ,11 ,15 ,18 ,22 ,26 ,30],
+        2023 => [32 ,30 ,27 ,20, 16 ,13 ,13 ,15 ,19 ,23 ,28 ,31],
+      ];
+      return $matrizAuto;
 } elseif ($modo == "manual"){ 
     $matrizManual = [];      
+    $meses = [
+        0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+        6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+        ];
     for ($anho = 2014; $anho <= 2023; $anho++) {
           for ($mes = 0; $mes <= 11; $mes++){
-          echo "Ingrese la temperatura del anho " . $anho . " del mes de " . [$mes] . ": ";
+          echo "Ingrese la temperatura del anho " . $anho . " del mes de " . $meses[$mes] . ": ";
           $matrizManual[$anho][$mes] = trim(fgets(STDIN));
           }  
         }
