@@ -126,12 +126,7 @@ if ($datos == "s" || $datos == "S") {
               for ($mes = 0; $mes <= 11; $mes++){
               echo "Ingrese la temperatura del anho " . $anho . " del mes de " . $meses[$mes] . ": ";
               $matrizManual[$anho][$mes] = trim(fgets(STDIN));
-              if($matrizManual[$anho][$mes] > $maxTemp ){
-                $maxTemp = $matrizManual[$anho][$mes];
-                $anhoMaxTemp = $anho;
-                $mesMaxTemp = $meses[$mes];
-              }   
-             }
+              }
               }
               echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
               for ($anho = 2014; $anho <= 2023; $anho++){
@@ -141,6 +136,17 @@ if ($datos == "s" || $datos == "S") {
                 }
                 echo "\n";
               }
+              
+              if($matrizManual[$anho][$mes] > $maxTemp ){
+                $maxTemp = $matrizManual[$anho][$mes];
+                $anhoMaxTemp = $anho;
+                $mesMaxTemp = $meses[$mes];
+              } 
+              if ($matrizManual[$anho][$mes] < $minTemp ){
+                $minTemp = $matrizManual[$anho][$mes];
+                $anhoMinTemp = $anho;
+                $mesMinTemp = $meses [$mes];
+              }  
 // TEMPERATURA DE UN ANHO Y MES
     echo "desea ver la temperatura de algun anho y mes en especificio? (s/n)";
     $espec = trim(fgets(STDIN));
@@ -202,7 +208,9 @@ if ($datos == "s" || $datos == "S") {
 echo "La MaxTemp es: " . $maxTemp . "\n";
 echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
 echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
-
+echo "La MinTemp es: " . $minTemp . "\n";
+echo "El anho con la MinTemp es: " . $anhoMinTemp . "\n";
+echo "El mes con la MinTemp es: " . $mesMinTemp . "\n";
       
 // CalcularPromedio
 function CalcularPromedio ($anho, $mes) {
