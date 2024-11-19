@@ -103,22 +103,24 @@ if ($datos == "s" || $datos == "S") {
                          echo "Ingrese el mes(1-12): ";
                          $mes = trim(fgets(STDIN)) - 1;
                          
-                  if ($mes >= 0 && $mes <=12){
+                  if ($mes >= 0 && $mes <=11){
                   for ($anho = 2014; $anho <= 2023; $anho++){
                     echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . ($matrizAuto[$anho][$mes]) . " \n";
-                    $promedio = CalcularPromedio($anho, $mes);
-                    
                     }
+                    $promedio = CalcularPromedio($anho, $mes);
                     echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
+                    } else {
+                      echo "mes no valido";
                     }
                     }
 
                   }
                 }
+// TEMPERATURAS PRIVAMERA
                 echo "Quiere ver las temperaturas de primavera(OCT-NOV-DIC)?";
                 $tresmeses = trim(fgets(STDIN));
 
-                if ($tresmeses == "s"){ 
+                if ($tresmeses == "s" || $tresmeses == "S"){ 
                
                 $primavera = [9, 10, 11];
                 echo "Las temperaturas de primavera son: " . "\n";
@@ -131,10 +133,27 @@ if ($datos == "s" || $datos == "S") {
                   }
                   echo "\n";
                 }
-              
+                  
+
                 
 // EMPIEZA LA MATRIZ MANUAL
-} 
+ } else { 
+  echo "desea ver los datos de los ultimos 5 anhos de invierno??(s/n)";
+  $thremeses = trim(fgets(STDIN));
+
+  if ($thremeses == "s"){
+  $invierno = [6, 7, 8];
+  echo "La temperaturas de invierno: " . "\n";
+  echo "Anho JUL AGOS SEP";
+for ($anho = 2019; $anho <= 2023; $anho++){
+  echo $anho . " ";
+  foreach ($invierno as $mes){
+    echo $matrizAuto[$anho][$mes] . "  ";
+  }
+  echo "\n";
+}
+}
+}
 } else {
   
     echo "entonces cargaremos los datos manualmente \n";
