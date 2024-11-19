@@ -1,9 +1,9 @@
 <?php
-
+// Modulo "CargarDatos" (String $modo) RETORNA 
 function CargarDatos($modo = "auto"){
    
-if ($modo == "auto") {
-$matrizAuto =  [ 
+if ($modo == "auto") {        //Modo Auto = Carga los datos automaticos 
+$matrizAuto =  [                                    
         2014 => [30, 28 ,26 ,22 ,18 ,12 ,10, 14, 17, 20, 25, 29],
         2015 => [33, 30, 27, 22, 19 ,13 ,11 ,15 ,18 ,21, 26 ,31],
         2016 => [34, 32 ,29 ,21 ,18 ,14 ,12 ,16 ,18 ,21 ,27 ,32],
@@ -15,30 +15,32 @@ $matrizAuto =  [
         2022 => [31 ,29 ,27 ,21, 17 ,12 ,11 ,15 ,18 ,22 ,26 ,30],
         2023 => [32 ,30 ,27 ,20, 16 ,13 ,13 ,15 ,19 ,23 ,28 ,31],
       ];
-      return $matrizAuto;
-} elseif ($modo == "manual"){ 
+      return $matrizAuto; // Retorna a Matriz Auto
+} elseif ($modo == "manual"){        //Modo Manual = Carga los datos manuales 1 x 1
     $matrizManual = [];      
+    //Nombre de los meses
     $meses = [
         0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
         6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
         ];
+        // PARA = pasa por anho y por mes, pidiendo la temperatura para cada anho y mes
         for ($anho = 2014; $anho <= 2023; $anho++) {
             for ($mes = 0; $mes <= 11; $mes++){
             echo "Ingrese la temperatura del anho " . $anho . " del mes de " . $meses[$mes] . ": ";
             $matrizManual[$anho][$mes] = trim(fgets(STDIN));
             }  
           }
-          echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
-         for ($anho = 2014; $anho <= 2023; $anho++) {
+          echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; // Imprime un texto con el anho y los meses
+         for ($anho = 2014; $anho <= 2023; $anho++) {        // PARA = pasa por anho, escribiendo en fila anho x anho
          echo $anho . " ";
               
-              for ($mes = 0; $mes <= 11; $mes++){
+              for ($mes = 0; $mes <= 11; $mes++){           // PARA = pasa por mes, escribiendo la temperatura 
               echo $matrizManual[$anho][$mes] . "  "; 
             }
-                 echo "\n";
+                 echo "\n";       //Salto de linea
             }
     }
-return $matrizManual;
+return $matrizManual; // Retorna a Matriz Manual
 }
 
 
@@ -48,29 +50,29 @@ $meses = [
     6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
     ];
 //Acumuladores
-$maxTemp = -99999;
-$minTemp = 99999;
-$anhoMaxTemp = " ";
-$mesMaxTemp = " ";
-$mesMinTemp = " ";
-$anhoMinTemp = " ";
+$maxTemp = -99999;           //Acumulador Maxima temperatura
+$minTemp = 99999;            //Acumulador Minima temperatura
+$anhoMaxTemp = " ";          //Acumulador AnhoMaxTemp se anota el anho con mayor temp
+$mesMaxTemp = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
+$mesMinTemp = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
+$anhoMinTemp = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
 
-echo "de que modo desea cargar los datos? (auto/manual)";
-$modo = trim(fgets(STDIN));
-$matriz = CargarDatos($modo);
+echo "de que modo desea cargar los datos? (auto/manual)";      //Solicitamos si queremos cargar automatico o manual
+$modo = trim(fgets(STDIN));                                    //Ingresamos
+$matriz = CargarDatos($modo);                                  //la matriz se carga en base al modulo que ingresamos, asi haciendo que vuelva la matriz auto o manual
   
 
-  echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
-         for ($anho = 2014; $anho <= 2023; $anho++) {
+echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
+         for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
          echo $anho . " ";
-         for ($mes = 0; $mes <= 11; $mes++){
+         for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
             echo $matriz[$anho][$mes] . "  "; 
-            if ($matriz[$anho][$mes] < $minTemp ){
+            if ($matriz[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
                 $minTemp = $matriz[$anho][$mes];
                 $anhoMinTemp = $anho;
                 $mesMinTemp = $meses[$mes];
               }    
-              if($matriz[$anho][$mes] > $maxTemp ){
+              if($matriz[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
                 $maxTemp = $matriz[$anho][$mes];
                 $anhoMaxTemp = $anho;
                 $mesMaxTemp = $meses[$mes];
@@ -85,15 +87,15 @@ $espec = trim(fgets(STDIN));
 
 
 if($espec == "s" || $espec == "S") {
-  echo "ingrese el anho: ";
+  echo "ingrese el anho: ";              //Ingresamos el anho
   $anho = trim(fgets(STDIN));
-  echo "ingrese el mes(1-12): ";
-  $mes = trim(fgets(STDIN)) - 1; 
+  echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
+  $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
   $matriz = CargarDatos($modo);
 
-  if($anho >= 2014 && $anho <= 2023) {
-   if ($mes >= 0 && $mes <= 11){     
-         echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";
+  if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
+   if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
+         echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";     // Imprime la salida
    } else {
     echo "mes no valido";
    }
