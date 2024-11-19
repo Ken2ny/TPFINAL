@@ -26,7 +26,7 @@ $meses = [
 
 //Empieza el ALGORITMO
 $maxTemp = 0;
-$minTemp = 0;
+$minTemp = 99999;
 $anhoMaxTemp = " ";
 $mesMaxTemp = " ";
 $mesMinTemp = " ";
@@ -37,26 +37,29 @@ $datos = trim(fgets(STDIN));
 
 if ($datos == "s" || $datos == "S") { 
      $matrizAuto = CargaDatosAutomatico($anho, $mes);
-    
+  
      echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
          for ($anho = 2014; $anho <= 2023; $anho++) {
          echo $anho . " ";
-              for ($mes = 0; $mes <= 11; $mes++){
-              echo $matrizAuto[$anho][$mes] . "  ";
               
-              if($matrizAuto[$anho][$mes] > $maxTemp ){
+              for ($mes = 0; $mes <= 11; $mes++){
+              echo $matrizAuto[$anho][$mes] . "  "; 
+              
+              if ($matrizAuto[$anho][$mes] > $maxTemp ){
                 $maxTemp = $matrizAuto[$anho][$mes];
                 $anhoMaxTemp = $anho;
                 $mesMaxTemp = $meses[$mes];
-              }  
+              }
               if ($matrizAuto[$anho][$mes] < $minTemp ){
                 $minTemp = $matrizAuto[$anho][$mes];
                 $anhoMinTemp = $anho;
-                $mesMinTemp = $meses [$mes];
-              }
+                $mesMinTemp = $meses[$mes];
+              }  
             }
                  echo "\n";
-              }
+            }
+              
+        
 // TEMPERATURA DE UN ANHO Y MES               
               echo "desea ver la temperatura de algun anho y mes en especificio? (s/n)";
               $espec = trim(fgets(STDIN));
@@ -109,14 +112,11 @@ if ($datos == "s" || $datos == "S") {
                     echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
                     }
                     }
-                  
 
- 
- 
- 
- 
                   }
                 }
+              
+                
 // EMPIEZA LA MATRIZ MANUAL
 } else {
   
