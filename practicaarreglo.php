@@ -44,5 +44,22 @@ $invierno = array(
   "2022" => array("enero" => 31, "febrero" => 29, "marzo" => 27, "abril" => 21, "mayo" => 17, "junio" => 12, "julio" => 11, "agosto" => 15, "septiembre" => 18, "octubre" => 22, "noviembre" => 26, "diciembre" => 30),
   "2023" => array("enero" => 32, "febrero" => 30, "marzo" => 27, "abril" => 20, "mayo" => 16, "junio" => 13, "julio" => 13, "agosto" => 15, "septiembre" => 19, "octubre" => 23, "noviembre" => 28, "diciembre" => 31),
   );
+  return $invierno;
 }
-return $invierno;
+
+
+echo "desea ver los datos de los ultimos 5 anhos de invierno??(s/n)";
+  $thremeses = trim(fgets(STDIN));
+
+  if ($thremeses == "s"){
+  $invierno = ultimosanhos();
+  echo "La temperaturas de invierno: " . "\n";
+  echo "Anho JUL AGOS SEP " . "\n";
+for ($anho = 2019; $anho <= 2023; $anho++){
+  echo $anho . " ";
+  for ($mes = 6; $mes < 9; $mes++){
+    echo $matriz[$anho][$mes] . "  ";
+  }
+  echo "\n";
+}
+}
