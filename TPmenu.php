@@ -1,7 +1,12 @@
 <?php 
 
-function CargarDatosAuto() {
+ //Nombre de los meses
+ $meses = [
+    0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+    6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+    ];
 
+function CargarDatosAuto() {
 $matrizAuto =  [                                    
         2014 => [30, 28 ,26 ,22 ,18 ,12 ,10, 14, 17, 20, 25, 29],
         2015 => [33, 30, 27, 22, 19 ,13 ,11 ,15 ,18 ,21, 26 ,31],
@@ -19,11 +24,7 @@ $matrizAuto =  [
 
 function CargarDatosManual() {
     $matrizManual = [];      
-    //Nombre de los meses
-    $meses = [
-        0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
-        6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
-        ];
+
         // PARA = pasa por anho y por mes, pidiendo la temperatura para cada anho y mes
         for ($anho = 2014; $anho <= 2023; $anho++) {
             for ($mes = 0; $mes <= 11; $mes++){
@@ -31,21 +32,24 @@ function CargarDatosManual() {
             $matrizManual[$anho][$mes] = trim(fgets(STDIN));
             }  
           }
-}
+    return $matrizManual;
+        }
 
-while (true){
+$continuar = "s";
+
+do {
 
 echo "MENU DE OPCIONES \n";
-echo "1. Cargar Datos Automaticamente";
-echo "2. Cargar Datos Manualmente";
-echo "3. Mostrar el contenido de matriz";
-echo "4. Mostrar la temperatura de un anho y mes especifico";
-echo "5. Mostrar las temperaturas de un mes de cada anho y el promedio";
-echo "6. Mostrar la minima y maxima temperatura, anho y mes.";
+echo "1. Cargar Datos Automaticamente \n";
+echo "2. Cargar Datos Manualmente \n";
+echo "3. Mostrar el contenido de matriz \n";
+echo "4. Mostrar la temperatura de un anho y mes especifico \n";
+echo "5. Mostrar las temperaturas de un mes de cada anho y el promedio \n";
+echo "6. Mostrar la minima y maxima temperatura, anho y mes \n";
 echo "7. Mostrar matriz de primavera(oct-nov-dic) de
-todos los años";
+todos los años \n";
 echo "8. Mostrar matriz de invierno últimos 5 años de
-invierno (jul-ago-sep)";
+invierno (jul-ago-sep) \n";
 
 $opcion = trim(fgets(STDIN));
 
@@ -74,7 +78,7 @@ case 4:
     $anho = trim(fgets(STDIN));
     echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
     $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
-    $matriz = CargarDatos($modo);
+    $matriz = CargarDatos();
 
     if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
     if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
@@ -120,16 +124,25 @@ case 6:
     break;     
 
 case 7:
+    //Acumuladores
+
+    $maxTemp = -99999;           //Acumulador Maxima temperatura
+    $minTemp = 99999;            //Acumulador Minima temperatura
+    $anhoMaxTemp = " ";          //Acumulador AnhoMaxTemp se anota el anho con mayor temp
+    $mesMaxTemp = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
+    $mesMinTemp = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
+    $anhoMinTemp = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
+    
     if ($matriz[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
         $minTemp = $matriz[$anho][$mes];
         $anhoMinTemp = $anho;
         $mesMinTemp = $meses[$mes];
       }    
-      if($matriz[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
+    if($matriz[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
         $maxTemp = $matriz[$anho][$mes];
         $anhoMaxTemp = $anho;
         $mesMaxTemp = $meses[$mes];
-      }   
+    }   
     echo "La MaxTemp es: " . $maxTemp . "\n";
     echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
     echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
@@ -166,15 +179,15 @@ case 9:
     }
     break;
 
-
-
-}
-
-
+default:
+   echo "opcion no valida";
+    
 
 }
+} while ($continuar == "s");
 
-
+echo "Quiere abrir el menu otra vez?";
+$continuar = trim(fgets(STDIN));
 
 
 
