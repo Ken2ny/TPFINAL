@@ -117,3 +117,29 @@ $matriz = array(
 return $matriz; 
 
 
+
+
+
+
+
+
+
+
+$primavera = [];
+echo "Las temperaturas de primavera son: " . "\n";
+echo "Anho OCT NOV DIC \n";
+
+for ($anho = 2014; $anho <= 2023; $anho++){
+  echo $anho . " ";
+  for ($mes = 9; $mes <= 11; $mes++){
+    echo $matriz[$anho][$mes] . "  ";
+  }
+  echo "\n";
+}
+
+
+
+
+
+
+
