@@ -35,6 +35,7 @@ function CargarDatosManual() {
             $matrizManual[$anho][$mes] = trim(fgets(STDIN));
             }  
           }
+    
     return $matrizManual;
         }
 
@@ -47,7 +48,7 @@ do {
     $mesMaxTemp = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
     $mesMinTemp = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
     $anhoMinTemp = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
-    $continuar = "s";
+    $continuar = true;
 
 echo "MENU DE OPCIONES \n";
 echo "1. Cargar Datos Automaticamente \n";
@@ -61,17 +62,22 @@ echo "8. Mostrar matriz de primavera(oct-nov-dic) de
 todos los años \n";
 echo "9. Mostrar matriz de invierno últimos 5 años de
 invierno (jul-ago-sep) \n";
+echo "10. Mostrar matriz asociativa \n";
+echo "11. Salir \n";
 
+echo "Ingrese opcion(1-11)";
 $opcion = trim(fgets(STDIN));
 
 switch($opcion) {
 // CargaDatosAutomatico
 case 1: 
     $matriz = CargarDatosAuto();
+    echo "Datos Cargados \n";
     break;
 // CargaDatosManual
 case 2:
     $matriz = CargarDatosManual(); 
+    echo "Datos Cargados \n";
     break;
 // Muestra la matriz cargada
 case 3:
@@ -97,10 +103,10 @@ case 4:
          echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";     // Imprime la salida
          
         } else {
-    echo "mes no valido";
+    echo "mes no valido \n";
     }
     } else {
-    echo "anho no valido";
+    echo "anho no valido \n";
     } 
     break;
 // Muestra la temperatura de todo un anho
@@ -116,7 +122,7 @@ case 5:
         }
         echo "\n";
     } else {
-     echo "anho no valido";
+     echo "anho no valido \n";
     }
     break;
 // Muestra la temperatura de un solo mes durante los anhos  y el promedio
@@ -131,7 +137,7 @@ case 6:
                 $promedio = CalcularPromedio($anho, $mes);   
                 echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
         } else {
-                  echo "datos no valido";
+                  echo "datos no valido \n";
         }             
     break;     
 // Pasa por todos los anhos y mes para moestrar Temperatura Min, Max, anho y mes
@@ -161,40 +167,54 @@ case 7:
     break;
 // Muestra las temperaturas en primavera
 case 8:
-    $primavera = [];
-    echo "Las temperaturas de primavera son: " . "\n";
-    echo "Anho OCT NOV DIC \n";
-    for ($anho = 2014; $anho <= 2023; $anho++){
-        echo $anho . " ";
-        for ($mes = 9; $mes <= 11; $mes++){
-            echo $matriz[$anho][$mes] . "  ";
-        }
-    echo "\n";
-    }  
+    
+$primavera = CargarPrimavera();
+echo "Las temperaturas de primavera son: " . "\n";
+echo "Anho OCT NOV DIC \n";
+
+for ($anho = 2014; $anho <= 2023; $anho++){
+  echo $anho . " ";
+  $meses = ["octubre", "noviembre", "diciembre"];
+  for ($mes = 0; $mes < count($meses); $mes++) {
+    echo $primavera[$anho][$meses[$mes]] . "  ";
+  
+  }
+  echo "\n";
+}
     break;
 // Muestra los ultimos 5 anhos de temperatura en invierno
 case 9: 
-    $invierno = [];
-    echo "La temperaturas de invierno: " . "\n";
-    echo "Anho JUL AGOS SEP " . "\n";
-    for ($anho = 2019; $anho <= 2023; $anho++){
-        echo $anho . " ";
-          for ($mes = 6; $mes < 9; $mes++){
-               echo $matriz[$anho][$mes] . "  ";
-    }
-    echo "\n";
-    }
+    
+$invierno = ultimosanhos();
+  
+  echo "La temperaturas de invierno: " . "\n";
+  echo "Anho JUL AGOS SEP " . "\n";
+
+  for ($anho = 2019; $anho <= 2023; $anho++){
+  echo $anho . " ";
+  $mezes = ["julio", "agosto", "septiembre"];
+  for ($mes = 0; $mes < count($mezes); $mes++){
+    echo $invierno[$anho][$mezes[$mes]] . "  ";
+  }
+  echo "\n";
+ }
     break;
 
-default:
-   echo "opcion no valida \n";
+case 10: 
+    $asociativo = [ 
+     "completa" => $matriz,
+     "Primavera" => $primavera = CargarPrimavera(),
+     "Inverno" => $invierno = ultimosanhos()
+    ];
+
    break;
 
-}
-echo "Quiere abrir el menu otra vez?";
-$continuar = trim(fgets(STDIN));
+case 11:
+    $continuar = false; 
 
-} while ($continuar == "s");
+}
+
+} while ($continuar);
 
 
 
@@ -222,3 +242,29 @@ function CalcularPromedio ($anho, $mes) {
 }
    return $promedio;
 }
+
+function ultimosanhos () { 
+$invierno = array(
+  "2019" => array( "julio" => 12, "agosto" => 11, "septiembre" => 17),
+  "2020" => array( "julio" => 10, "agosto" => 12, "septiembre" => 16),
+  "2021" => array( "julio" => 11, "agosto" => 13, "septiembre" => 17),
+  "2022" => array( "julio" => 11, "agosto" => 15, "septiembre" => 18),
+  "2023" => array( "julio" => 13, "agosto" => 15, "septiembre" => 19),
+  );
+  return $invierno;
+}
+function CargarPrimavera (){ 
+    $primavera = array(  
+    "2014" => array("octubre" => 20, "noviembre" => 25, "diciembre" => 29),
+    "2015" => array("octubre" => 21, "noviembre" => 26, "diciembre" => 31),
+    "2016" => array("octubre" => 21, "noviembre" => 27, "diciembre" => 32),
+    "2017" => array("octubre" => 22, "noviembre" => 26, "diciembre" => 31),
+    "2018" => array("octubre" => 20, "noviembre" => 24, "diciembre" => 30),
+    "2019" => array("octubre" => 23, "noviembre" => 25, "diciembre" => 29),
+    "2020" => array("octubre" => 22, "noviembre" => 27, "diciembre" => 29),
+    "2021" => array("octubre" => 21, "noviembre" => 28, "diciembre" => 30),
+    "2022" => array("octubre" => 22, "noviembre" => 26, "diciembre" => 30),
+    "2023" => array("octubre" => 23, "noviembre" => 28, "diciembre" => 31),
+    );
+    return $primavera;
+    };
