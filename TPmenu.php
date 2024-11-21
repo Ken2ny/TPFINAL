@@ -71,46 +71,94 @@ $opcion = trim(fgets(STDIN));
 switch($opcion) {
 // CargaDatosAutomatico
 case 1: 
-    $matriz = CargarDatosAuto();
+    $matrizAuto = CargarDatosAuto();
     echo "Datos Cargados \n";
     break;
 // CargaDatosManual
 case 2:
-    $matriz = CargarDatosManual(); 
+    $matrizManual = CargarDatosManual(); 
     echo "Datos Cargados \n";
     break;
 // Muestra la matriz cargada
 case 3:
-    echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
+    if ($matrizAuto) {
+        echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
+        for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
+        echo $anho . " ";
+        for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+           echo $matrizAuto[$anho][$mes] . "  "; 
+       }
+       echo "\n";
+       }
+    } elseif($matrizManual) {
+        echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
          for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
          echo $anho . " ";
          for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
-            echo $matriz[$anho][$mes] . "  "; 
+            echo $matrizManual[$anho][$mes] . "  "; 
         }
         echo "\n";
         }
-        break;
+     }
+    break;
 // Muestra la temperatura del anho y mes
 case 4:
-    echo "ingrese el anho: ";              //Ingresamos el anho
-    $anho = trim(fgets(STDIN));
-    echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
-    $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
+    if ($matrizAuto){
+        echo "ingrese el anho: ";              //Ingresamos el anho
+        $anho = trim(fgets(STDIN));
+        echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
+        $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
+        
     
-
-    if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
-    if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
-         echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";     // Imprime la salida
-         
+        if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
+        if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
+             echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matrizAuto[$anho][$mes] . "\n";     // Imprime la salida
+             
+            } else {
+        echo "mes no valido \n";
+        }
         } else {
-    echo "mes no valido \n";
+        echo "anho no valido \n";
+        } 
+    } else if ($matrizManual){
+        echo "ingrese el anho: ";              //Ingresamos el anho
+        $anho = trim(fgets(STDIN));
+        echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
+        $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
+        
+    
+        if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
+        if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
+             echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matrizManual[$anho][$mes] . "\n";     // Imprime la salida
+             
+            } else {
+        echo "mes no valido \n";
+        }
+        } else {
+        echo "anho no valido \n";
+        } 
     }
-    } else {
-    echo "anho no valido \n";
-    } 
     break;
 // Muestra la temperatura de todo un anho
 case 5:
+    
+    if ($matrizAuto){
+        echo "ingrese el anho: ";
+        $anho = trim(fgets(STDIN));
+    
+            if ($anho >= 2014 && $anho <= 2023){ 
+            echo "la temperatura de todo el anho: " . $anho . "\n";
+            echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
+                for ($mes = 0; $mes <= 11; $mes++){ 
+                echo $matrizAuto[$anho][$mes] . "  ";
+            }
+            echo "\n";
+        } else {
+         echo "anho no valido \n";
+        }
+    } else if ($matrizManual){
+      
+    
     echo "ingrese el anho: ";
     $anho = trim(fgets(STDIN));
 
@@ -118,124 +166,269 @@ case 5:
         echo "la temperatura de todo el anho: " . $anho . "\n";
         echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
             for ($mes = 0; $mes <= 11; $mes++){ 
-            echo $matriz[$anho][$mes] . "  ";
+            echo $matrizManual[$anho][$mes] . "  ";
         }
         echo "\n";
     } else {
      echo "anho no valido \n";
     }
+}
     break;
 // Muestra la temperatura de un solo mes durante los anhos  y el promedio
 case 6:
-    echo "Ingrese el mes(1-12): ";
-    $mes = trim(fgets(STDIN)) - 1;
-       
-        if ($mes >= 0 && $mes <=11){
-            for ($anho = 2014; $anho <= 2023; $anho++){
-                echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";    
-                }
-                $promedio = CalcularPromedio($anho, $mes);   
-                echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
-        } else {
-                  echo "datos no valido \n";
-        }             
+    if ($matrizAuto){
+        echo "Ingrese el mes(1-12): ";
+        $mes = trim(fgets(STDIN)) - 1;
+           
+            if ($mes >= 0 && $mes <=11){
+                for ($anho = 2014; $anho <= 2023; $anho++){
+                    echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . $matrizAuto[$anho][$mes] . "\n";    
+                    }
+                    $promedio = CalcularPromedio($anho, $mes,$matrizAuto);   
+                    echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
+            } else {
+                      echo "datos no valido \n";
+            }     
+    } else if ($matrizManual){
+        echo "Ingrese el mes(1-12): ";
+        $mes = trim(fgets(STDIN)) - 1;
+           
+            if ($mes >= 0 && $mes <=11){
+                for ($anho = 2014; $anho <= 2023; $anho++){
+                    echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . $matrizManual[$anho][$mes] . "\n";    
+                    }
+                    $promedio = CalcularPromedio($anho, $mes,$matrizManual);   
+                    echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
+            } else {
+                      echo "datos no valido \n";
+            }     
+    }
     break;     
 // Pasa por todos los anhos y mes para moestrar Temperatura Min, Max, anho y mes
 case 7:
-    for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
+    if ($matrizAuto){
+        for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
         
-        for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+            for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+            
+               if ($matrizAuto[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
+                   $minTemp = $matrizAuto[$anho][$mes];
+                   $anhoMinTemp = $anho;
+                   $mesMinTemp = $meses[$mes];
+                 }    
+                 if($matrizAuto[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
+                   $maxTemp = $matrizAuto[$anho][$mes];
+                   $anhoMaxTemp = $anho;
+                   $mesMaxTemp = $meses[$mes];
+                 }   
+                }
+        }
+        echo "La MaxTemp es: " . $maxTemp . "\n";
+        echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
+        echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
+        echo "La MinTemp es: " . $minTemp . "\n";
+        echo "El anho con la MinTemp es: " . $anhoMinTemp . "\n";
+        echo "El mes con la MinTemp es: " . $mesMinTemp . "\n";
+    } else if ($matrizManual){
+        for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
         
-           if ($matriz[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
-               $minTemp = $matriz[$anho][$mes];
-               $anhoMinTemp = $anho;
-               $mesMinTemp = $meses[$mes];
-             }    
-             if($matriz[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
-               $maxTemp = $matriz[$anho][$mes];
-               $anhoMaxTemp = $anho;
-               $mesMaxTemp = $meses[$mes];
-             }   
-            }
+            for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+            
+               if ($matrizManual[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
+                   $minTemp = $matrizManual[$anho][$mes];
+                   $anhoMinTemp = $anho;
+                   $mesMinTemp = $meses[$mes];
+                 }    
+                 if($matrizManual[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
+                   $maxTemp = $matrizManual[$anho][$mes];
+                   $anhoMaxTemp = $anho;
+                   $mesMaxTemp = $meses[$mes];
+                 }   
+                }
+        }
+        echo "La MaxTemp es: " . $maxTemp . "\n";
+        echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
+        echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
+        echo "La MinTemp es: " . $minTemp . "\n";
+        echo "El anho con la MinTemp es: " . $anhoMinTemp . "\n";
+        echo "El mes con la MinTemp es: " . $mesMinTemp . "\n";
     }
-    echo "La MaxTemp es: " . $maxTemp . "\n";
-    echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
-    echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
-    echo "La MinTemp es: " . $minTemp . "\n";
-    echo "El anho con la MinTemp es: " . $anhoMinTemp . "\n";
-    echo "El mes con la MinTemp es: " . $mesMinTemp . "\n";
     break;
 // Muestra las temperaturas en primavera
 case 8:
-    
-$primavera = CargarPrimavera();
-echo "Las temperaturas de primavera son: " . "\n";
-echo "Anho OCT NOV DIC \n";
-
-for ($anho = 2014; $anho <= 2023; $anho++){
-  echo $anho . " ";
-  $meses = ["octubre", "noviembre", "diciembre"];
-  for ($mes = 0; $mes < count($meses); $mes++) {
-    echo $primavera[$anho][$meses[$mes]] . "  ";
-  
-  }
-  echo "\n";
-}
-    break;
+    if ($matrizAuto){
+        $primavera = CargarPrimavera();
+        echo "Las temperaturas de primavera son: " . "\n";
+        echo "Anho OCT NOV DIC \n";
+        
+        for ($anho = 2014; $anho <= 2023; $anho++){
+          echo $anho . " ";
+          $meses = ["octubre", "noviembre", "diciembre"];
+          for ($mes = 0; $mes < count($meses); $mes++) {
+            echo $primavera[$anho][$meses[$mes]] . "  ";
+          
+          }
+          echo "\n";
+          }
+    } else if ($matrizManual){
+        $primavera = $matrizManual;
+        echo "Las temperaturas de primavera son: " . "\n";
+        echo "Anho OCT NOV DIC \n";
+        
+        for ($anho = 2014; $anho <= 2023; $anho++){
+          echo $anho . " ";
+          $meses = ["octubre", "noviembre", "diciembre"];
+          for ($mes = 0; $mes < count($meses); $mes++) {
+            echo $primavera[$anho][$meses[$mes]] . "  ";
+          
+          }
+          echo "\n";
+          }
+    } 
+ break;
 // Muestra los ultimos 5 anhos de temperatura en invierno
 case 9: 
-    
-$invierno = ultimosanhos();
+    if ($matrizAuto){
+        $invierno = ultimosanhos();
   
-  echo "La temperaturas de invierno: " . "\n";
-  echo "Anho JUL AGOS SEP " . "\n";
-
-  for ($anho = 2019; $anho <= 2023; $anho++){
-  echo $anho . " ";
-  $mezes = ["julio", "agosto", "septiembre"];
-  for ($mes = 0; $mes < count($mezes); $mes++){
-    echo $invierno[$anho][$mezes[$mes]] . "  ";
-  }
-  echo "\n";
- }
+        echo "La temperaturas de invierno: " . "\n";
+        echo "Anho JUL AGOS SEP " . "\n";
+      
+        for ($anho = 2019; $anho <= 2023; $anho++){
+        echo $anho . " ";
+        $meses = ["julio", "agosto", "septiembre"];
+        for ($mes = 0; $mes < count($meses); $mes++){
+          echo $invierno[$anho][$meses[$mes]] . "  ";
+        }
+        echo "\n";
+        }
+    } else if ($matrizManual){
+        $invierno = $matrizManual;
+  
+        echo "La temperaturas de invierno: " . "\n";
+        echo "Anho JUL AGOS SEP " . "\n";
+      
+        for ($anho = 2019; $anho <= 2023; $anho++){
+        echo $anho . " ";
+        $meses = ["julio", "agosto", "septiembre"];
+        for ($mes = 0; $mes < count($meses); $mes++){
+          echo $invierno[$anho][$meses[$mes]] . "  ";
+        }
+        echo "\n";
+        }
+    }
     break;
 
 case 10: 
-    $asociativo = [ 
-     "completa" => $matriz,
-     "Primavera" => $primavera = CargarPrimavera(),
-     "Inverno" => $invierno = ultimosanhos()
-    ];
-
-   break;
+    if ($matrizAuto){
+        $primavera = CargarPrimavera();
+        $invierno = ultimosanhos();
+        $asociativo = [ 
+            "completa" => $matrizAuto,
+            "Primavera" => $primavera,
+            "Invierno" => $invierno
+           ];
+           echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
+           for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
+           echo $anho . " ";
+           for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+              echo $asociativo["completa"][$anho][$mes] . "  "; 
+           }
+           echo "\n";
+       }
+           echo "Primavera " . "\n";
+           echo "Anho OCT NOV DIC \n";
+           for ($anho = 2014; $anho <= 2023; $anho++){
+                echo $anho . " ";
+                   $meses = ["octubre", "noviembre", "diciembre"];
+                      for ($mes = 0; $mes < count($meses); $mes++) {  
+                       echo $asociativo["Primavera"][$anho][$meses[$mes]] . "  ";
+           }
+           echo "\n";
+       }
+       echo "invierno: " . "\n";
+         echo "Anho JUL AGOS SEP " . "\n";
+       
+         for ($anho = 2019; $anho <= 2023; $anho++){
+         echo $anho . " ";
+         $meses = ["julio", "agosto", "septiembre"];
+         for ($mes = 0; $mes < count($meses); $mes++){
+           echo $asociativo["Invierno"][$anho][$meses[$mes]] . "  ";
+         }
+         echo "\n";
+         }
+       
+    } else if ($matrizManual){
+        $primavera = $matrizManual;
+        $invierno = $matrizManual;
+       
+        $asociativo = [ 
+            "completa" => $matrizManual,
+            "Primavera" => $primavera,
+            "Invierno" => $invierno
+           ];
+           echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
+           for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
+           echo $anho . " ";
+           for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+              echo $asociativo["completa"][$anho][$mes] . "  "; 
+           }
+           echo "\n";
+       }
+           echo "Primavera " . "\n";
+           echo "Anho OCT NOV DIC \n";
+           for ($anho = 2014; $anho <= 2023; $anho++){
+                echo $anho . " ";
+                   $meses = ["octubre", "noviembre", "diciembre"];
+                      for ($mes = 0; $mes < count($meses); $mes++) {  
+                       echo $asociativo["Primavera"][$anho][$meses[$mes]] . "  ";
+           }
+           echo "\n";
+       }
+       echo "invierno: " . "\n";
+         echo "Anho JUL AGOS SEP " . "\n";
+       
+         for ($anho = 2019; $anho <= 2023; $anho++){
+         echo $anho . " ";
+         $meses = ["julio", "agosto", "septiembre"];
+         for ($mes = 0; $mes < count($meses); $mes++){
+           echo $asociativo["Invierno"][$anho][$meses[$mes]] . "  ";
+         }
+         echo "\n";
+         }
+    }
+    break;
 
 case 11:
     $continuar = false; 
-
+   
 }
+
+
 
 } while ($continuar);
 
 
 
-function CalcularPromedio ($anho, $mes) {
+function CalcularPromedio ($anho, $mes, $matrizAuto,$matrizManual) {
     
     
-    if ($matriz = CargarDatosAuto()){ 
+    if ($matrizAuto){ 
     $promedio = 0;
     $totalDecada = 0;
     if ($mes >= 0 && $mes <= 11) {
       for ($anho = 2014; $anho <= 2023; $anho++){
-         $totalDecada += $matriz[$anho][$mes];
+         $totalDecada += $matrizAuto[$anho][$mes];
       }
      $promedio = $totalDecada / 12;
      }
-} elseif($matriz = CargarDatosManual()) {
+}
+    if($matrizManual) {
     $promedio = 0;
     $totalDecada = 0;
     if ($mes >= 0 && $mes <= 11) {
       for ($anho = 2014; $anho <= 2023; $anho++){
-         $totalDecada += $matriz[$anho][$mes];
+         $totalDecada += $matrizManual[$anho][$mes];
       }
      $promedio = $totalDecada / 12;
      }
@@ -253,6 +446,7 @@ $invierno = array(
   );
   return $invierno;
 }
+
 function CargarPrimavera (){ 
     $primavera = array(  
     "2014" => array("octubre" => 20, "noviembre" => 25, "diciembre" => 29),
