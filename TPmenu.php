@@ -1,7 +1,7 @@
 <?php 
 
  //Nombre de los meses
- $meses = [
+$meses = [
     0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
     6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
     ];
@@ -24,7 +24,10 @@ $matrizAuto =  [
 
 function CargarDatosManual() {
     $matrizManual = [];      
-
+    $meses = [
+        0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+        6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+        ];
         // PARA = pasa por anho y por mes, pidiendo la temperatura para cada anho y mes
         for ($anho = 2014; $anho <= 2023; $anho++) {
             for ($mes = 0; $mes <= 11; $mes++){
@@ -35,9 +38,16 @@ function CargarDatosManual() {
     return $matrizManual;
         }
 
-$continuar = "s";
+
 
 do {
+    $maxTemp = -99999;           //Acumulador Maxima temperatura
+    $minTemp = 99999;            //Acumulador Minima temperatura
+    $anhoMaxTemp = " ";          //Acumulador AnhoMaxTemp se anota el anho con mayor temp
+    $mesMaxTemp = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
+    $mesMinTemp = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
+    $anhoMinTemp = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
+    $continuar = "s";
 
 echo "MENU DE OPCIONES \n";
 echo "1. Cargar Datos Automaticamente \n";
@@ -78,7 +88,7 @@ case 4:
     $anho = trim(fgets(STDIN));
     echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
     $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
-    $matriz = CargarDatos();
+    
 
     if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
     if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
@@ -125,13 +135,8 @@ case 6:
 
 case 7:
     //Acumuladores
-
-    $maxTemp = -99999;           //Acumulador Maxima temperatura
-    $minTemp = 99999;            //Acumulador Minima temperatura
-    $anhoMaxTemp = " ";          //Acumulador AnhoMaxTemp se anota el anho con mayor temp
-    $mesMaxTemp = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
-    $mesMinTemp = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
-    $anhoMinTemp = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
+ 
+    
     
     if ($matriz[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
         $minTemp = $matriz[$anho][$mes];
@@ -181,23 +186,20 @@ case 9:
 
 default:
    echo "opcion no valida";
-    
+   break;
 
 }
-} while ($continuar == "s");
-
 echo "Quiere abrir el menu otra vez?";
 $continuar = trim(fgets(STDIN));
 
+} while ($continuar == "s");
 
 
 
-
-
-
-   
 function CalcularPromedio ($anho, $mes) {
-    $matriz = CargarDatos();
+    
+    
+    if ($matriz = CargarDatosAuto()){ 
     $promedio = 0;
     $totalDecada = 0;
     if ($mes >= 0 && $mes <= 11) {
@@ -206,5 +208,15 @@ function CalcularPromedio ($anho, $mes) {
       }
      $promedio = $totalDecada / 12;
      }
+} elseif($matriz = CargarDatosManual()) {
+    $promedio = 0;
+    $totalDecada = 0;
+    if ($mes >= 0 && $mes <= 11) {
+      for ($anho = 2014; $anho <= 2023; $anho++){
+         $totalDecada += $matriz[$anho][$mes];
+      }
+     $promedio = $totalDecada / 12;
+     }
+}
    return $promedio;
-   }
+}
