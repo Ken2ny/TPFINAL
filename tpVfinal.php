@@ -1,51 +1,18 @@
 <?php
- //Nombre de los meses
- $meses = [
-    0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
-    6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
-    ];
-// MODULO CARGA AUTOMATICA
-function CargarDatosAuto () {
-    $matrizAuto =  [                                    
-        2014 => [30, 28 ,26 ,22 ,18 ,12 ,10, 14, 17, 20, 25, 29],
-        2015 => [33, 30, 27, 22, 19 ,13 ,11 ,15 ,18 ,21, 26 ,31],
-        2016 => [34, 32 ,29 ,21 ,18 ,14 ,12 ,16 ,18 ,21 ,27 ,32],
-        2017 => [33 ,31 ,28 ,22, 18 ,13 ,11 ,14 ,17 ,22 ,26 ,31],
-        2018 => [32 ,30 ,28 ,22, 17 ,12 ,9 ,13 ,16 ,20 , 24 ,30],
-        2019 => [32 ,30 ,27 ,23, 19 ,14 ,12 ,11 ,17 ,23 ,25 ,29],
-        2020 => [31 ,29 ,28 ,21, 19 ,13 ,10 ,12 ,16 ,22 ,27 ,29],
-        2021 => [30 ,28 ,26 ,20, 16 ,12 ,11 ,13 ,17 ,21 ,28 ,30],
-        2022 => [31 ,29 ,27 ,21, 17 ,12 ,11 ,15 ,18 ,22 ,26 ,30],
-        2023 => [32 ,30 ,27 ,20, 16 ,13 ,13 ,15 ,19 ,23 ,28 ,31],
-      ];
-      return $matrizAuto; // Retorna a Matriz Auto
-}
-//  MODULO CARGA MANUAL
-function CargarDatosManual () {
-    $matrizManual = [];      
-        //Nombre de los meses
-        $meses = [
-            0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
-            6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
-            ];
-            // PARA = pasa por anho y por mes, pidiendo la temperatura para cada anho y mes
-            for ($anho = 2014; $anho <= 2023; $anho++) {
-                for ($mes = 0; $mes <= 11; $mes++){
-                echo "Ingrese la temperatura del anho " . $anho . " del mes de " . $meses[$mes] . ": ";
-                $matrizManual[$anho][$mes] = trim(fgets(STDIN));
-                }  
-              }
-              return $matrizManual; // Retorna a Matriz Manual
-            }
-   
+// ALGORITMO PRINCIPAL
+//Nombre de los meses
+$meses = [
+  0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+  6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+  ];
 
 do {
     $maxTemp = -99999;           //Acumulador Maxima temperatura
     $minTemp = 99999;            //Acumulador Minima temperatura
-    $anhoMaxTemp = " ";          //Acumulador AnhoMaxTemp se anota el anho con mayor temp
-    $mesMaxTemp = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
-    $mesMinTemp = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
-    $anhoMinTemp = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
+    $anhoMax = " ";          //Acumulador AnhoMaxTemp se anota el anho con mayor temp
+    $mesMax = " ";           //Acumulador mesMaxTemp se anota el mes con mayor temp
+    $mesMin = " ";           //Acumulador mesMinTemp se anota el mes con menor temp
+    $anhoMin = " ";          //Acumulador anhoMinTemp se anota el anho con menor temp
     $continuar = true;           // Validar repeticion
   
 echo "MENU DE OPCIONES \n";
@@ -69,12 +36,12 @@ $opcion = trim(fgets(STDIN));
 switch($opcion) {
 // CargaDatosAutomatico
 case 1:
-    $matriz = CargarDatosAuto();
+    $matriz = cargarDatosAuto();
     echo "Datos cargados \n";
     break;
 // CargaDatosManual
 case 2:
-    $matriz = CargarDatosManual();
+    $matriz = cargarDatosManual();
     echo "Datos cargados \n";
     break;
 // Muestra la matriz cargada
@@ -131,7 +98,7 @@ case 6:
             for ($anho = 2014; $anho <= 2023; $anho++){
                 echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";    
                 }
-                $promedio = CalcularPromedio($anho, $mes, $matriz);   
+                $promedio = calcularPromedio($mes, $matriz);   
                 echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
         } else {
                   echo "datos no valido \n";
@@ -145,22 +112,22 @@ case 7:
         
            if ($matriz[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
                $minTemp = $matriz[$anho][$mes];
-               $anhoMinTemp = $anho;
-               $mesMinTemp = $meses[$mes];
+               $anhoMin = $anho;
+               $mesMin = $meses[$mes];
              }    
              if($matriz[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
                $maxTemp = $matriz[$anho][$mes];
-               $anhoMaxTemp = $anho;
-               $mesMaxTemp = $meses[$mes];
+               $anhoMax = $anho;
+               $mesMax = $meses[$mes];
              }   
             }
             }
         echo "La MaxTemp es: " . $maxTemp . "\n";
-        echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
-        echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
+        echo "El anho con la MaxTemp es: " . $anhoMax . "\n";
+        echo "El mes con la MaxTemp es: " . $mesMax . "\n";
         echo "La MinTemp es: " . $minTemp . "\n";
-        echo "El anho con la MinTemp es: " . $anhoMinTemp . "\n";
-        echo "El mes con la MinTemp es: " . $mesMinTemp . "\n";
+        echo "El anho con la MinTemp es: " . $anhoMin . "\n";
+        echo "El mes con la MinTemp es: " . $mesMin . "\n";
         break;
 // Muestra las temperaturas en primavera
 case 8:
@@ -192,8 +159,6 @@ case 9:
 // Mostrar Matriz Asociativa
 case 10:
   //Nombre de los meses
- 
-
     $primavera = $matriz;
     $invierno = $matriz;
     $asociativo = [ 
@@ -244,7 +209,8 @@ case 11:
 
 
 // MODULOS
-function CalcularPromedio ($anho, $mes, $matriz) {
+// MODULO CalcularPromedio
+function calcularPromedio ($mes, $matriz) {
     
     $promedio = 0;
     $totalDecada = 0;
@@ -256,3 +222,37 @@ function CalcularPromedio ($anho, $mes, $matriz) {
      }
    return $promedio;
    }
+//  MODULO CARGA MANUAL
+function cargarDatosManual () {
+  $matrizManual = [];      
+      //Nombre de los meses
+      $meses = [
+          0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+          6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+          ];
+          // PARA = pasa por anho y por mes, pidiendo la temperatura para cada anho y mes
+          for ($anho = 2014; $anho <= 2023; $anho++) {
+              for ($mes = 0; $mes <= 11; $mes++){
+              echo "Ingrese la temperatura del anho " . $anho . " del mes de " . $meses[$mes] . ": ";
+              $matrizManual[$anho][$mes] = trim(fgets(STDIN));
+              }  
+            }
+            return $matrizManual; // Retorna a Matriz Manual
+          }
+// MODULO CARGA AUTOMATICA
+function cargarDatosAuto () {
+  $matrizAuto =  [                                    
+      2014 => [30, 28 ,26 ,22 ,18 ,12 ,10, 14, 17, 20, 25, 29],
+      2015 => [33, 30, 27, 22, 19 ,13 ,11 ,15 ,18 ,21, 26 ,31],
+      2016 => [34, 32 ,29 ,21 ,18 ,14 ,12 ,16 ,18 ,21 ,27 ,32],
+      2017 => [33 ,31 ,28 ,22, 18 ,13 ,11 ,14 ,17 ,22 ,26 ,31],
+      2018 => [32 ,30 ,28 ,22, 17 ,12 ,9 ,13 ,16 ,20 , 24 ,30],
+      2019 => [32 ,30 ,27 ,23, 19 ,14 ,12 ,11 ,17 ,23 ,25 ,29],
+      2020 => [31 ,29 ,28 ,21, 19 ,13 ,10 ,12 ,16 ,22 ,27 ,29],
+      2021 => [30 ,28 ,26 ,20, 16 ,12 ,11 ,13 ,17 ,21 ,28 ,30],
+      2022 => [31 ,29 ,27 ,21, 17 ,12 ,11 ,15 ,18 ,22 ,26 ,30],
+      2023 => [32 ,30 ,27 ,20, 16 ,13 ,13 ,15 ,19 ,23 ,28 ,31],
+    ];
+    return $matrizAuto; // Retorna a Matriz Auto
+}
+
