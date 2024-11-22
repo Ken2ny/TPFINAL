@@ -38,6 +38,24 @@ function cargaAutomatica() {
 
 }
 
+
+function cargaManual() {
+    $temperaturas = array();
+    $anios = array("2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023");
+    $meses = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+
+    foreach ($anios as $anio) {
+        foreach ($meses as $mes) {
+            echo "Ingrese la temperatura para el año $anio, mes $mes: ";
+            $temperatura = trim(fgets(STDIN));
+            $temperaturas[$anio][$mes] = $temperatura;
+        }
+    }
+
+    return $temperaturas;
+}
+
+
 function mostrarFilasColumnas($temperaturas) {
     echo "Filas:\n";
     foreach ($temperaturas as $anio => $datosMes) {
@@ -155,8 +173,7 @@ function datosInvierno($temperaturas) {
 
 do { 
     echo "Menú de opciones: \n";
-    echo "1. Cargar matriz automáticamente. \n";
-    echo "2. Cargar matriz manualmente. \n";
+    echo "1. Cargar matriz automática. 2. Cargar matriz manual. \n";
     echo "3. Mostrar el contenido de la matriz por filas y columnas. \n";
     echo "4. Mostrar temperatura dado un año y un mes. \n";
     echo "5. Mostrar para un determinado año, las temperaturas de todos los meses. \n";
@@ -170,47 +187,49 @@ do {
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
-        case 1:
+        case 1: 
+            $tipoMatriz = trim(fgets(STDIN));
+            if ($tipoMatriz == 1) {
             $temperaturas = cargaAutomatica();
+            } else {
+            $temperaturas = cargaManual();
+            }
         break;
         case 2: 
-            $temperaturas = cargaManual();
-        break;
-        case 3: 
             mostrarFilasColumnas($temperaturas);
         break;
-        case 4:
+        case 3:
         echo "Ingrese el año: ";
         $anio = trim(fgets(STDIN));
         echo "Ingrese el mes: ";
         $mes = trim(fgets(STDIN));
         mostrarTemperaturaAnioMes($temperaturas, $anio, $mes);
         break;
-        case 5:
+        case 4:
         echo "Ingrese el año: ";
         $anio = trim(fgets(STDIN));
         mostrarTemperaturasAnio($temperaturas, $anio);
         break;
-        case 6: 
+        case 5: 
         echo "Ingrese el mes: ";
         $mes = trim(fgets(STDIN));
         mostrarTemperaturasMes($temperaturas, $mes);
         break;
-        case 7:
+        case 6:
         hallarMaxMin($temperaturas);
         break;
-        case 8:
+        case 7:
         $datosPrimavera = datosPrimavera($temperaturas); 
         echo "Datos primavera: ";
         print_r($datosPrimavera);
         break;
-        case 9: 
+        case 8: 
         $datosInvierno = datosInvierno($temperaturas); 
         echo "Datos invierno: ";
         print_r($datosInvierno);
         echo "\n";
         break;
-        case 10:
+        case 9:
         $compPrimInv = [
             "completa" => $temperaturas,
             "primavera" => $datosPrimavera,
@@ -218,6 +237,8 @@ do {
     ];
         print_r($compPrimInv);
         break;
+        case 10:
+        echo "Fin programa. ";
 }
 
 } while ($opcion != 0);
