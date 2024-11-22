@@ -137,7 +137,11 @@ for ($anho = 2014; $anho <= 2023; $anho++){
   echo "\n";
 }
 
+if ($matrizAuto){
 
+} elseif ($matrizManual){
+  
+}
 
 
 

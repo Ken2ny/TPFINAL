@@ -206,7 +206,16 @@ function CalcularPromedio ($anho, $mes) {
    return $promedio;
    }
 
-
+function ultimosanhos () { 
+$invierno = array(
+  "2019" => array( "julio" => 12, "agosto" => 11, "septiembre" => 17),
+  "2020" => array( "julio" => 10, "agosto" => 12, "septiembre" => 16),
+  "2021" => array( "julio" => 11, "agosto" => 13, "septiembre" => 17),
+  "2022" => array( "julio" => 11, "agosto" => 15, "septiembre" => 18),
+  "2023" => array( "julio" => 13, "agosto" => 15, "septiembre" => 19),
+  );
+  return $invierno;
+}
 
 
 
