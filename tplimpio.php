@@ -1,4 +1,9 @@
 <?php
+ //Nombre de los meses
+ $meses = [
+    0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+    6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+    ];
 // MODULO CARGA AUTOMATICA
 function CargarDatosAuto () {
     $matrizAuto =  [                                    
@@ -125,42 +130,101 @@ case 6:
             for ($anho = 2014; $anho <= 2023; $anho++){
                 echo "La temperatura en " . $anho  . " de: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";    
                 }
-                $promedio = CalcularPromedio($anho, $mes);   
+                $promedio = CalcularPromedio($anho, $mes, $matriz);   
                 echo "El promedio de " . $meses[$mes] . " es " . $promedio . "\n";
         } else {
                   echo "datos no valido \n";
-        }  
+        }
+        break;  
 // Pasa por todos los anhos y mes para moestrar Temperatura Min, Max, anho y mes
 case 7:
-
+    for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
+        
+        for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+        
+           if ($matriz[$anho][$mes] < $minTemp ){               //Para establecer los acumuladores MinTemp
+               $minTemp = $matriz[$anho][$mes];
+               $anhoMinTemp = $anho;
+               $mesMinTemp = $meses[$mes];
+             }    
+             if($matriz[$anho][$mes] > $maxTemp ){              //Para establecer los acumuladores MaxTemp
+               $maxTemp = $matriz[$anho][$mes];
+               $anhoMaxTemp = $anho;
+               $mesMaxTemp = $meses[$mes];
+             }   
+            }
+            }
+        echo "La MaxTemp es: " . $maxTemp . "\n";
+        echo "El anho con la MaxTemp es: " . $anhoMaxTemp . "\n";
+        echo "El mes con la MaxTemp es: " . $mesMaxTemp . "\n";
+        echo "La MinTemp es: " . $minTemp . "\n";
+        echo "El anho con la MinTemp es: " . $anhoMinTemp . "\n";
+        echo "El mes con la MinTemp es: " . $mesMinTemp . "\n";
+        break;
 // Muestra las temperaturas en primavera
 case 8:
-
+    $primavera = [];
+    echo "Las temperaturas de primavera son: " . "\n";
+    echo "Anho OCT NOV DIC \n";
+    
+    for ($anho = 2014; $anho <= 2023; $anho++){
+      echo $anho . " ";
+      for ($mes = 9; $mes <= 11; $mes++){
+        echo $matriz[$anho][$mes] . "  ";
+      }
+      echo "\n";
+    }
+    break;
 // Muestra los ultimos 5 anhos de temperatura en invierno
 case 9:
-
+    $invierno = [];
+    echo "La temperaturas de invierno: " . "\n";
+    echo "Anho JUL AGOS SEP " . "\n";
+  for ($anho = 2019; $anho <= 2023; $anho++){
+    echo $anho . " ";
+    for ($mes = 6; $mes < 9; $mes++){
+      echo $matriz[$anho][$mes] . "  ";
+    }
+    echo "\n";
+  }
+  break;
 // Mostrar Matriz Asociativa
 case 10:
-
+    $primavera = $matriz;
+    $invierno = $matriz;
+    $asociativo = [ 
+        "completa" => $matriz,
+        "Primavera" => $primavera,
+        "Invierno" => $invierno
+       ];
+    echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; //Se imprime la matriz completa en pantalla
+       for ($anho = 2014; $anho <= 2023; $anho++) {            //Pasa por todos los anhos
+       echo $anho . " ";
+       for ($mes = 0; $mes <= 11; $mes++){                     //Pasa por todos los meses
+          echo $asociativo["completa"][$anho][$mes] . "  "; 
+       }
+       echo "\n";
+    }
 // Salir
 case 11:
 
     $continuar = false;
 
 }
+
 //Do while / Repetir
 } while ($continuar);
 
 
 
 // MODULOS
-function CalcularPromedio ($anho, $mes) {
-    $matriz = CargarDatos();
+function CalcularPromedio ($anho, $mes, $matriz) {
+    
     $promedio = 0;
     $totalDecada = 0;
     if ($mes >= 0 && $mes <= 11) {
-      for ($anho = 2014; $anho <= 2023; $anho++){
-         $totalDecada += $matriz[$anho][$mes];
+      for ($anio = 2014; $anio <= 2023; $anio++){
+         $totalDecada += $matriz[$anio][$mes];
       }
      $promedio = $totalDecada / 12;
      }
