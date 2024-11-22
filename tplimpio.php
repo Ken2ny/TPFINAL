@@ -104,14 +104,17 @@ echo "Ingrese opcion(1-11)";
 $opcion = trim(fgets(STDIN));
 
 switch($opcion) {
+// CargaDatosAutomatico
 case 1:
     $matriz = CargarDatosAuto();
     echo "Datos cargados \n";
     break;
+// CargaDatosManual
 case 2:
     $matriz = CargarDatosManual();
     echo "Datos cargados \n";
     break;
+// Muestra la matriz cargada
 case 3:
     echo "Anho ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n"; // Imprime un texto con el anho y los meses
     for ($anho = 2014; $anho <= 2023; $anho++) {        // PARA = pasa por anho, escribiendo en fila anho x anho
@@ -123,24 +126,44 @@ case 3:
             echo "\n";       //Salto de linea
        }
        break;
+// Muestra la temperatura del anho y mes
 case 4:
-
+    echo "ingrese el anho: ";
+    $anho = trim(fgets(STDIN));
+    
+    if ($anho >= 2014 && $anho <= 2023){ 
+      echo "la temperatura de todo el anho: " . $anho . "\n";
+      echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
+      for ($mes = 0; $mes <= 11; $mes++){ 
+       echo $matriz[$anho][$mes] . "  ";
+       }
+       echo "\n";
+    } else {
+        echo "anho no valido";
+    }
+// Muestra la temperatura de todo un anho
 case 5:
 
+// Muestra la temperatura de un solo mes durante los anhos  y el promedio
 case 6:
 
+// Pasa por todos los anhos y mes para moestrar Temperatura Min, Max, anho y mes
 case 7:
 
+// Muestra las temperaturas en primavera
 case 8:
 
+// Muestra los ultimos 5 anhos de temperatura en invierno
 case 9:
 
+// Mostrar Matriz Asociativa
 case 10:
 
+// Salir
 case 11:
 
     $continuar = false;
 
 }
-
+//Do while / Repetir
 } while ($continuar);
