@@ -91,19 +91,20 @@ case 3:
        break;
 // Muestra la temperatura del anho y mes
 case 4:
-    echo "ingrese el anho: ";
-    $anho = trim(fgets(STDIN));
-    
-    if ($anho >= 2014 && $anho <= 2023){ 
-      echo "la temperatura de todo el anho: " . $anho . "\n";
-      echo "ENE FEB MAR ABR MAY JUN JUL AGO SEP OCT NOV DIC \n";
-      for ($mes = 0; $mes <= 11; $mes++){ 
-       echo $matriz[$anho][$mes] . "  ";
-       }
-       echo "\n";
-    } else {
-        echo "anho no valido";
-    }
+  echo "ingrese el anho: ";              //Ingresamos el anho
+  $anho = trim(fgets(STDIN));
+  echo "ingrese el mes(1-12): ";         //Ingresamos el mes, del 1 a 12
+  $mes = trim(fgets(STDIN)) - 1;         //Al numero ingresado se le resta 1 porque las array empiezan de 0
+
+  if($anho >= 2014 && $anho <= 2023) {                   //Pasa por todos los anhos
+   if ($mes >= 0 && $mes <= 11){                          //Valida si el mes esta entre 0 y 11
+         echo "la temperatura del anho: " . $anho . " del mes: " . $meses[$mes] . " es: " . $matriz[$anho][$mes] . "\n";     // Imprime la salida
+   } else {
+    echo "mes no valido";
+   }
+} else {
+    echo "anho no valido";
+} 
     break;
 // Muestra la temperatura de todo un anho
 case 5:
