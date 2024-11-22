@@ -190,6 +190,12 @@ case 9:
   break;
 // Mostrar Matriz Asociativa
 case 10:
+  //Nombre de los meses
+ $meses = [
+    0 => "enero", 1 => "febrero",2 => "marzo",3 => "abril",4 => "mayo",5 => "junio",
+    6 => "julio",7 => "agosto",8 => "septiembre",9 => "octubre",10 => "noviembre",11 => "diciembre",
+    ];
+    
     $primavera = $matriz;
     $invierno = $matriz;
     $asociativo = [ 
@@ -205,6 +211,28 @@ case 10:
        }
        echo "\n";
     }
+        echo "Primavera " . "\n";
+        echo "Anho OCT NOV DIC \n";
+           for ($anho = 2014; $anho <= 2023; $anho++){
+                echo $anho . " ";
+                   
+                      for ($mes = 9; $mes <= 11; $mes++) {  
+                       echo $asociativo["Primavera"][$anho][$meses[$mes]] . "  ";
+           }
+           echo "\n";
+    }
+        echo "invierno: " . "\n";
+        echo "Anho JUL AGOS SEP " . "\n";
+       
+         for ($anho = 2019; $anho <= 2023; $anho++){
+         echo $anho . " ";
+         
+         for ($mes = 6; $mes <= 9 ; $mes++){
+           echo $asociativo["Invierno"][$anho][$meses[$mes]] . "  ";
+         }
+         echo "\n";
+         }
+    break;
 // Salir
 case 11:
 
