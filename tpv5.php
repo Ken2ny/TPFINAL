@@ -1,5 +1,5 @@
 <?php
-// Carga automática
+// Función que realiza una carga automática de la matriz
 function cargaAutomatica() {
     $temperaturas = array(
         "2014" => array(
@@ -38,7 +38,7 @@ function cargaAutomatica() {
 
 }
 
-
+// Función que realiza una carga manual de la matriz
 function cargaManual() {
     $temperaturas = array();
     $anios = array("2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023");
@@ -55,6 +55,7 @@ function cargaManual() {
     return $temperaturas;
 }
 
+// Función que muestra el contenido de la matriz por filas y columnas
 
 function mostrarFilasColumnas($temperaturas) {
     echo "Filas:\n";
@@ -76,12 +77,15 @@ function mostrarFilasColumnas($temperaturas) {
     }
 }
 
+// Función que muestra, dado un año y un mes, el valor de temperatura correspondiente
+
 function mostrarTemperaturaAnioMes($temperaturas, $anio, $mes) {
     if (isset($temperaturas[$anio]) && isset($temperaturas[$anio][$mes])) {
         echo "La temperatura en $mes de $anio es: " . $temperaturas[$anio][$mes] . "\n";
     }
 }
 
+// Función que muestra, dado un determinado año, las temperaturas de todos los meses
 function mostrarTemperaturasAnio($temperaturas, $anio) {
     if (isset($temperaturas[$anio])) {
         echo "Temperaturas de $anio:\n";
@@ -91,6 +95,7 @@ function mostrarTemperaturasAnio($temperaturas, $anio) {
     }
 }
 
+// Función que muestra, dado un mes determinado, las temperaturas de todos los años y el promedio
 function mostrarTemperaturasMes($temperaturas, $mes) {
     $total = 0;
     $contTemp = 0;
@@ -110,6 +115,8 @@ function mostrarTemperaturasMes($temperaturas, $mes) {
         echo "El promedio de temperaturas del mes es: $prom\n";
     }
 }
+
+// Función que muestra las temperaturas máximas y mínimas
 
 function hallarMaxMin($temperaturas) {
     $maxTemperatura = 0;
@@ -138,6 +145,8 @@ function hallarMaxMin($temperaturas) {
     echo "Temperatura mínima: $minTemperatura (Año: $anioMin, Mes: $mesMin)\n";
 }
 
+// Función que genera un arreglo que almacena los datos de primavera
+
 function datosPrimavera($temperaturas) {
     $datosPrimavera = [];
 
@@ -152,6 +161,7 @@ function datosPrimavera($temperaturas) {
     return $datosPrimavera;
 }
 
+// Función que genera un arreglo que almacena los datos de invierno de los últimos cinco años
 function datosInvierno($temperaturas) {
     $datosInvierno = [];
     
