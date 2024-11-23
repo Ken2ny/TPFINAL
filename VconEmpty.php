@@ -252,7 +252,7 @@ case 11:
 
 // MODULOS
 // MODULO CalcularPromedio
-function calcularPromedio ($anho, $mes, $matriz) {
+function calcularPromedio ($mes, $matriz) {
     
     $promedio = 0;
     $totalDecada = 0;
