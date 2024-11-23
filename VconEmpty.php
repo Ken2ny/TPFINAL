@@ -32,7 +32,7 @@ invierno (jul-ago-sep) \n";
 echo "10. Mostrar matriz asociativa \n";
 echo "11. Salir \n";
 
-echo "Ingrese opcion(1-11)";
+echo "Ingrese opcion(1-11): ";
 $opcion = trim(fgets(STDIN));
 
 switch($opcion) {
@@ -192,8 +192,7 @@ case 9:
     }
     echo "\n";
   }
-  break;
-}
+  break; }
 // Mostrar Matriz Asociativa
 case 10:
   //Nombre de los meses
