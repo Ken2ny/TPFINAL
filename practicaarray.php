@@ -248,20 +248,22 @@ do {
            mostrarMatrizCompleta($matriz);
            break;
        case 4:
-           echo "Ingrese el año: ";
+           echo "Ingrese el año (2014-2023): ";
            $anio = trim(fgets(STDIN));
-           echo "Ingrese el mes:";
-           $mes = trim(fgets(STDIN));
+           echo "Ingrese el mes (1-12): ";
+           $mes = trim(fgets(STDIN)) - 1;
            mostrarTemperaturasAnioMes($matriz, $anio, $mes, $meses);
            break;
        case 5:
-           echo "Ingrese el año: ";
+           echo "Ingrese el año (2014-2023): ";
            $anio = trim(fgets(STDIN));
+           echo "Ingrese el mes (1-12): ";
+           $mes = trim(fgets(STDIN)) - 1;
            mostrarTemperaturasAnio($matriz, $anio);
            break;
        case 6:
-           echo "Ingrese el mes: ";
-           $mes = trim(fgets(STDIN));
+           echo "Ingrese el mes (1-12): ";
+           $mes = trim(fgets(STDIN)) - 1;
            mostrarTemperaturasMes($mes, $matriz, $meses);
            $promedio = calcularPromedio($mes, $matriz);
            echo "El promedio de " . $meses[$mes] . " es " . $promedio . "°C\n";
