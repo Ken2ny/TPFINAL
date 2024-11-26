@@ -36,7 +36,7 @@ function cargarMatrizManual() {
 }
 // Función que muestra el contenido de la matriz por filas y columnas.
 function mostrarMatrizCompleta($matriz) {
-    echo "Año ENE   FEB   MAR   ABR   MAY   JUN   JUL   AGO   SEP   OCT   NOV   DIC \n"; // Imprime un texto con el año y los meses
+    echo "Año  ENE   FEB   MAR   ABR   MAY   JUN   JUL   AGO   SEP   OCT   NOV   DIC \n"; // Imprime un texto con el año y los meses
     for ($anio = 2014; $anio <= 2023; $anio++) {        // PARA: pasa por año, escribiendo en fila año por año
         echo $anio . " ";
         for ($mes = 0; $mes <= 11; $mes++) {           // PARA: pasa por mes, escribiendo la temperatura
@@ -272,6 +272,7 @@ do {
         $anio = trim(fgets(STDIN));
         echo "Ingrese el mes (1-12): ";
         $mes = trim(fgets(STDIN)) - 1;
+        echo "Cargando...... \n";
         mostrarTempAnioMes($matriz, $anio, $mes, $meses);
         break;
         }
@@ -282,6 +283,7 @@ do {
         } else {
         echo "Ingrese el año (2014-2023): ";
         $anio = trim(fgets(STDIN));
+        echo "Cargando...... \n";
         mostrarTempAnio($matriz,$anio);
         break;
         }
@@ -292,6 +294,7 @@ do {
         } else {
         echo "Ingrese el mes (1-12): ";
         $mes = trim(fgets(STDIN)) - 1;
+        echo "Cargando...... \n";
         mostrarTempMes($mes,$matriz,$meses);
         $promedio = calcularPromedio($mes, $matriz);
         echo "El promedio de: " . $meses[$mes] . " es " . $promedio . "°C \n";
@@ -302,6 +305,7 @@ do {
         echo "Datos no cargados \n";
         break;
         } else {
+        echo "Cargando...... \n";
         hallarMaxMin($matriz, $meses);
         break;
         }
@@ -310,6 +314,7 @@ do {
         echo "Datos no cargados \n";
         break;
         } else {
+        echo "Cargando...... \n";    
         mostrarDatosPrimavera($matriz, $meses);
         break;
         }
@@ -318,6 +323,7 @@ do {
         echo "Datos no cargados \n";
         break;
         } else {
+        echo "Cargando...... \n";
         mostrarDatosInvierno($matriz,$meses);
         break;
         }
@@ -327,7 +333,8 @@ do {
         break;
         } else {
         echo "Cargando...... \n";
-        mostrarMatrizAsociativa($matriz);
+        $asociativo = cargarMatrizAsociativa($matriz);
+        print_r($asociativo);
         break;
         }       
     case 0:
