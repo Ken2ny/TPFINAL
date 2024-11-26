@@ -290,7 +290,7 @@ do {
         break;
         } else {
         $asociativa = cargarMatrizAsociativa($matriz);    //Se llama al modulo
-        echo "Anho ENE   FEB   MAR   ABR   MAY   JUN   JUL   AGO   SEP   OCT   NOV   DIC \n"; //Se imprime la matriz completa en pantalla
+        echo "Año ENE   FEB   MAR   ABR   MAY   JUN   JUL   AGO   SEP   OCT   NOV   DIC \n"; //Se imprime la matriz completa en pantalla
         for ($anio = 2014; $anio <= 2023; $anio++) {                                        //Pasa por todos los anhos
         echo $anio . " ";                                                                   //Imprime el anho
             for ($mes = 0; $mes <= 11; $mes++){                                            //Pasa por todos los meses
@@ -299,7 +299,7 @@ do {
         echo "\n"; //Salto de linea
         }
         echo "Primavera " . "\n";
-        echo "Anho OCT   NOV   DIC \n";
+        echo "Año OCT   NOV   DIC \n";
         for ($anio = 2014; $anio <= 2023; $anio++){                             //Pasa por todos los anhos
         echo $anio . " ";                                                       //Imprime el anho
             for ($mes = 9; $mes <= 11; $mes++) {                               //Pasa por los meses OCT-NOV-DIC
@@ -309,7 +309,7 @@ do {
         }
         
         echo "invierno: " . "\n";
-        echo "Anho JUL   AGOS  SEP " . "\n";
+        echo "Año JUL   AGOS  SEP " . "\n";
         for ($anio = 2019; $anio <= 2023; $anio++){                           //Pasa por todos los anhos
         echo $anio . " ";                                                     //Imprime el anho
             for ($mes = 6; $mes <= 8 ; $mes++){                               //Pasa por los meses JUL-AGOS-SEP
